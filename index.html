@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="Ejercicios de cinemática vectorial contextualizados en la Misión Artemis I de la NASA. 1º Bachillerato LOMLOE. Análisis de la trayectoria de la cápsula Orion hacia la Luna.">
+<meta name="keywords" content="cinemática vectorial, Artemis, NASA, bachillerato, física, movimiento, vectores, educación">
+<meta name="author" content="Antonio López">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Cinemática Vectorial · Misión Artemis I">
+<meta property="og:description" content="Ejercicio educativo interactivo sobre la trayectoria de Orion hacia la Luna.">
+<meta property="og:url" content="https://antoniolopezpolo.github.io/MisionArtemis/">
+<meta property="og:site_name" content="Misión Artemis - Recursos Educativos">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cinemática Vectorial · Misión Artemis I">
+<meta name="twitter:description" content="Ejercicio educativo interactivo sobre la trayectoria de Orion.">
+<title>Cinemática Vectorial · Misión Artemis I</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap');
+
+  :root {
+    --navy: #0a1628;
+    --navy-mid: #142240;
+    --nasa-red: #C03A24;
+    --nasa-blue: #1d5fa6;
+    --nasa-gold: #E8A422;
+    --text: #1a1a2e;
+    --text-muted: #4a5568;
+    --border: #d0d8e8;
+    --surface: #f4f7fc;
+    --surface2: #e8eef8;
+    --white: #ffffff;
+    --success: #10b981;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --text: #e8eef8;
+      --text-muted: #a0afc0;
+      --border: #2a3a50;
+      --surface: #1a2a40;
+      --surface2: #0f1a2a;
+      --white: #1a2a40;
+    }
+    body {
+      background: #0a1628;
+    }
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    background: #f0f3fa;
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.7;
+    padding: 2rem 1rem 4rem;
+  }
+
+  .page {
+    max-width: 820px;
+    margin: 0 auto;
+    background: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(10,22,40,0.12);
+  }
+
+  /* ─── HEADER ─────────────────────────────────────── */
+  .header {
+    background: var(--navy);
+    color: white;
+    padding: 2rem 2.5rem 1.6rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(1.5px 1.5px at 15% 20%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 30% 70%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(2px 2px at 55% 15%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 60%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 80% 30%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 75%, rgba(255,255,255,0.4) 0%, transparent 100%);
+  }
+
+  .header-badge {
+    display: inline-block;
+    background: var(--nasa-red);
+    color: white;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 3px;
+    margin-bottom: 0.7rem;
+    position: relative;
+  }
+
+  .header h1 {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: clamp(1.5rem, 5vw, 2rem);
+    font-weight: 600;
+    line-height: 1.2;
+    position: relative;
+    letter-spacing: -0.01em;
+  }
+
+  .header h1 em {
+    font-style: italic;
+    color: #a8c4e8;
+  }
+
+  .header-meta {
+    margin-top: 0.9rem;
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    position: relative;
+    font-size: clamp(11px, 2vw, 12px);
+  }
+
+  .header-meta span {
+    color: #8aabcc;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .header-meta span strong {
+    color: #c8ddf0;
+    font-weight: 500;
+  }
+
+  .header-icon {
+    position: absolute;
+    right: 2.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.08;
+    font-size: 9rem;
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  /* ─── CONTENT ─────────────────────────────────────── */
+  .content {
+    padding: 2rem 2.5rem;
+  }
+
+  /* ─── SECTION LABELS ───────────────────────────────── */
+  .section-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--nasa-blue);
+    margin-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    scroll-margin-top: 80px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ─── NASA DATA BOX ──────────────────────────────── */
+  .nasa-box {
+    background: var(--navy);
+    color: white;
+    border-radius: 6px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.3rem 2rem;
+    border-left: 4px solid var(--nasa-gold);
+  }
+
+  @media (max-width: 600px) {
+    .nasa-box {
+      grid-template-columns: 1fr;
+      gap: 0.3rem;
+    }
+  }
+
+  .nasa-box-header {
+    grid-column: 1 / -1;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--nasa-gold);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .nasa-row {
+    display: flex;
+    flex-direction: column;
+    padding: 0.25rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .nasa-row:last-child { border-bottom: none; }
+
+  .nasa-key {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #8aabcc;
+    font-weight: 500;
+  }
+
+  .nasa-val {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: white;
+  }
+
+  /* ─── CONTEXT PARAGRAPH ──────────────────────────── */
+  .context-box {
+    background: var(--surface);
+    border-radius: 6px;
+    border-left: 4px solid var(--nasa-blue);
+    padding: 1.1rem 1.4rem;
+    margin-bottom: 2rem;
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.75;
+  }
+
+  .context-box p + p { margin-top: 0.6rem; }
+
+  .context-box strong { color: var(--text); font-weight: 500; }
+
+  /* ─── DIAGRAM ─────────────────────────────────���───── */
+  .diagram-wrap {
+    background: var(--surface);
+    border-radius: 6px;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: auto;
+  }
+
+  .diagram-caption {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: 0.5rem;
+    font-style: italic;
+    line-height: 1.6;
+  }
+
+  /* ─── EQUATION BOX ───────────────────────────────── */
+  .eq-box {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1rem 1.4rem;
+    margin: 1rem 0 1.5rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 13.5px;
+    line-height: 2;
+    color: var(--navy-mid);
+    position: relative;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .eq-box {
+      background: var(--surface);
+      color: #a8c4e8;
+    }
+  }
+
+  .eq-box .eq-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--nasa-blue);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .eq-copy-btn {
+    position: absolute;
+    top: 0.7rem;
+    right: 0.7rem;
+    background: var(--nasa-blue);
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 3px;
+    font-size: 11px;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+
+  .eq-copy-btn:hover { opacity: 1; }
+
+  .eq-box .eq-note {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-top: 0.3rem;
+  }
+
+  /* ─── PREGUNTAS ───────────────────────────────────── */
+  .pregunta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+    align-items: flex-start;
+    scroll-margin-top: 80px;
+  }
+
+  .pregunta-letter {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+  }
+
+  .pregunta-body {
+    flex: 1;
+  }
+
+  .pregunta-body p { 
+    font-size: 14.5px; 
+    line-height: 1.65;
+    margin-bottom: 0.5rem;
+  }
+
+  .pregunta-body .sub {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-top: 0.25rem;
+    background: var(--surface);
+    padding: 0.4rem 0.6rem;
+    border-radius: 3px;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .tag-ext {
+    display: inline-block;
+    background: #fff3cd;
+    color: #856404;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 3px;
+    vertical-align: middle;
+    margin-left: 6px;
+  }
+
+  /* ─── DIVIDER ─────────────────────────────────────── */
+  .divider {
+    border: none;
+    border-top: 1px dashed var(--border);
+    margin: 2rem 0;
+  }
+
+  /* ─── SOLUCIONES ─────────────────────────────────── */
+  .sol-toggle {
+    background: none;
+    border: 1.5px solid var(--navy);
+    border-radius: 6px;
+    padding: 0.7rem 1.2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--navy);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 1.5rem;
+    transition: all 0.2s;
+    letter-spacing: 0.02em;
+  }
+
+  .sol-toggle:hover { 
+    background: var(--surface);
+    transform: translateY(-2px);
+  }
+
+  .sol-toggle .arrow { 
+    transition: transform 0.2s; 
+    display: inline-block;
+    font-size: 12px;
+  }
+
+  .sol-toggle.open .arrow { transform: rotate(90deg); }
+
+  #soluciones { display: none; }
+  #soluciones.visible { display: block; }
+
+  .solucion {
+    background: var(--surface);
+    border-radius: 6px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 1rem;
+    border-left: 3px solid var(--nasa-blue);
+    animation: slideIn 0.3s ease-out;
+  }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .solucion-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 0.6rem;
+  }
+
+  .solucion-letter {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--nasa-blue);
+    color: white;
+    font-weight: 600;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .solucion-title {
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--navy);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .solucion-title { color: #a8c4e8; }
+  }
+
+  .solucion-body {
+    font-size: 13.5px;
+    line-height: 1.85;
+    color: var(--text-muted);
+  }
+
+  .solucion-body .math {
+    font-family: 'DM Mono', monospace;
+    font-size: 12.5px;
+    background: var(--white);
+    border-radius: 4px;
+    padding: 0.6rem 1rem;
+    display: block;
+    margin: 0.4rem 0;
+    color: var(--navy-mid);
+    border: 1px solid var(--border);
+    line-height: 1.9;
+    overflow-x: auto;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .solucion-body .math {
+      background: var(--surface2);
+      color: #a8c4e8;
+    }
+  }
+
+  .solucion-body .resultado {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    background: var(--navy);
+    color: var(--nasa-gold);
+    border-radius: 4px;
+    padding: 0.6rem 1rem;
+    display: block;
+    margin: 0.4rem 0;
+    line-height: 1.8;
+    overflow-x: auto;
+  }
+
+  .solucion-body .nota {
+    font-size: 12px;
+    color: #718096;
+    font-style: italic;
+    margin-top: 0.5rem;
+    display: block;
+    padding: 0.4rem 0.6rem;
+    background: rgba(113, 128, 150, 0.1);
+    border-left: 3px solid #718096;
+    border-radius: 2px;
+    padding-left: 0.8rem;
+  }
+
+  /* ─── FOOTER ─────────────────────────────────────── */
+  .footer {
+    background: var(--navy);
+    color: #8aabcc;
+    font-size: 11px;
+    padding: 1rem 2.5rem;
+    text-align: center;
+    letter-spacing: 0.04em;
+    line-height: 1.8;
+  }
+
+  .footer a {
+    color: var(--nasa-gold);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--nasa-gold);
+    transition: opacity 0.2s;
+  }
+
+  .footer a:hover { opacity: 0.8; }
+
+  /* ─── TABLE OF CONTENTS (TOC) ─────────────────────── */
+  .toc {
+    position: fixed;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1rem;
+    max-width: 200px;
+    font-size: 12px;
+    box-shadow: 0 2px 8px rgba(10,22,40,0.1);
+    z-index: 100;
+  }
+
+  .toc a {
+    display: block;
+    padding: 0.4rem 0.6rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    margin-bottom: 0.2rem;
+    transition: all 0.2s;
+  }
+
+  .toc a:hover {
+    color: var(--nasa-blue);
+    border-left-color: var(--nasa-blue);
+    background: var(--surface);
+  }
+
+  .toc-title {
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 0.6rem;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  @media (max-width: 1200px) {
+    .toc { display: none; }
+  }
+
+  /* ─── PRINT STYLES ──────────────────────────────– */
+  @media print {
+    body { 
+      background: white; 
+      padding: 0; 
+    }
+    .page { 
+      box-shadow: none;
+      max-width: 100%;
+      border-radius: 0;
+    }
+    .sol-toggle { display: none; }
+    .toc { display: none; }
+    #soluciones { display: block !important; }
+    .header::before { display: none; }
+    .header-icon { display: none; }
+    .eq-copy-btn { display: none; }
+    a { color: #1d5fa6; }
+  }
+
+  /* ─── MOBILE OPTIMIZATIONS ──────────────────────– */
+  @media (max-width: 640px) {
+    body {
+      padding: 1rem 0.5rem 2rem;
+    }
+
+    .page {
+      border-radius: 4px;
+    }
+
+    .header {
+      padding: 1.5rem 1.5rem 1rem;
+    }
+
+    .header h1 {
+      font-size: 1.4rem;
+    }
+
+    .header-meta {
+      flex-direction: column;
+      gap: 0.6rem;
+      font-size: 11px;
+    }
+
+    .content {
+      padding: 1.5rem 1rem;
+    }
+
+    .pregunta-letter {
+      width: 28px;
+      height: 28px;
+      font-size: 12px;
+    }
+
+    .eq-box {
+      font-size: 12px;
+      padding: 0.8rem 1rem;
+      margin: 0.8rem 0 1rem;
+    }
+
+    .nasa-box {
+      padding: 1rem;
+    }
+
+    .eq-copy-btn {
+      font-size: 10px;
+      padding: 3px 6px;
+    }
+  }
+
+  /* ─── ACCESSIBILITY ─────────────────────────────– */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* Focus visible para mejor accesibilidad */
+  button:focus-visible,
+  a:focus-visible {
+    outline: 2px solid var(--nasa-blue);
+    outline-offset: 2px;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- TABLE OF CONTENTS -->
+  <div class="toc" role="navigation" aria-label="Índice de contenidos">
+    <div class="toc-title">📑 Índice</div>
+    <a href="#datos">Datos de misión</a>
+    <a href="#contexto">Contexto</a>
+    <a href="#ecuaciones">Ecuaciones</a>
+    <a href="#diagrama">Diagrama</a>
+    <a href="#cuestiones">Cuestiones</a>
+    <a href="#soluciones">Soluciones</a>
+  </div>
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-icon">🚀</div>
+    <div class="header-badge">Física · 1.º Bachillerato · LOMLOE</div>
+    <h1>Cinemática vectorial:<br><em>La ruta de Orion hacia la Luna</em></h1>
+    <div class="header-meta">
+      <span>⬡ <strong>Bloque:</strong> Movimiento y fuerzas</span>
+      <span>📐 <strong>Nivel:</strong> 1.º Bachillerato</span>
+      <span>🌙 <strong>Contexto:</strong> Misión Artemis I · NASA (2022)</span>
+      <span>⏱ <strong>Estimación:</strong> 45–60 min</span>
+    </div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <!-- NASA DATA -->
+    <div id="datos" class="section-label">Datos reales de la misión</div>
+    <div class="nasa-box" role="region" aria-label="Datos técnicos Artemis I">
+      <div class="nasa-box-header">
+        ◈ Artemis I · Deep Space Network / NASA GSFC Tracking Data
+      </div>
+      <div class="nasa-row">
+        <span class="nasa-key">Lanzamiento</span>
+        <span class="nasa-val">16 nov. 2022 · 01:47 UTC · KSC LC-39B</span>
+      </div>
+      <div class="nasa-row">
+        <span class="nasa-key">Propulsor</span>
+        <span class="nasa-val">SLS Block 1 — el cohete más potente jamás construido por la NASA</span>
+      </div>
+      <div class="nasa-row">
+        <span class="nasa-key">Cápsula</span>
+        <span class="nasa-val">Orion MPCV (sin tripulación)</span>
+      </div>
+      <div class="nasa-row">
+        <span class="nasa-key">Duración misión</span>
+        <span class="nasa-val">25,5 días</span>
+      </div>
+      <div class="nasa-row">
+        <span class="nasa-key">TLI (inyección translunar)</span>
+        <span class="nasa-val">~ 1 h 45 min tras el lanzamiento</span>
+      </div>
+      <div class="nasa-row">
+        <span class="nasa-key">Dist. Tierra–Luna</span>
+        <span class="nasa-val">384 400 km (media)</span>
+      </div>
+      <div class="nasa-row">
+        <span class="nasa-key">Sobrevuelo lunar</span>
+        <span class="nasa-val">21 nov. 2022 · altitud mín. ≈ 130 km sobre la superficie lunar</span>
+      </div>
+      <div class="nasa-row">
+        <span class="nasa-key">Velocidad TLI</span>
+        <span class="nasa-val">≈ 10,2 km/s relativa a la Tierra (después del quemado)</span>
+      </div>
+    </div>
+
+    <!-- CONTEXT -->
+    <div id="contexto" class="section-label">Contexto del problema</div>
+    <div class="context-box" role="region" aria-label="Descripción del contexto">
+      <p>
+        Tras la maniobra de inyección translunar (TLI), la cápsula <strong>Orion</strong> se separa del propulsor y
+        navega libremente hacia la Luna. Para analizar su trayectoria, definimos un <strong>sistema de referencia
+        bidimensional</strong> con <strong>origen en el centro de la Tierra</strong>:
+      </p>
+      <p>
+        · El eje <strong>x</strong> apunta en la dirección inicial hacia la Luna.<br>
+        · El eje <strong>y</strong> es perpendicular a <em>x</em>, en el plano orbital de la misión.
+      </p>
+      <p>
+        Los datos del <em>Deep Space Network</em> de la NASA, simplificados para el análisis, indican que durante
+        una ventana de 2 horas en la fase de crucero translunar, las coordenadas de la cápsula se pueden
+        modelar con las siguientes ecuaciones paramétricas (unidades: km, horas):
+      </p>
+    </div>
+
+    <!-- EQUATIONS -->
+    <div id="ecuaciones" class="eq-box">
+      <div class="eq-title">Ecuaciones de posición · r(t)</div>
+      <button class="eq-copy-btn" onclick="copiarEcuaciones()" title="Copiar al portapapeles">📋 Copiar</button>
+      <pre>x(t) = 180 000 + 18 000·t  (km)
+y(t) =  80 000 + 24 000·t  (km)</pre>
+      <div class="eq-note">donde t se mide en horas desde el instante de referencia (t = 0 h)</div>
+    </div>
+
+    <!-- DIAGRAM -->
+    <div id="diagrama" class="section-label">Sistema de referencia</div>
+    <div class="diagram-wrap" role="img" aria-label="Diagrama del sistema de referencia bidimensional">
+      <svg width="100%" viewBox="0 0 680 340" xmlns="http://www.w3.org/2000/svg" style="max-width: 600px;">
+        <title>Sistema de referencia bidimensional con origen en el centro de la Tierra</title>
+        <defs>
+          <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M1 1L9 5L1 9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+          <marker id="ah-axis" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+            <path d="M1 1L9 5L1 9" fill="none" stroke="#1a1a2e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+          <marker id="ah-disp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M1 1L9 5L1 9" fill="none" stroke="#E8A422" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+        </defs>
+
+        <!-- Grid lines (subtle) -->
+        <line x1="90" y1="290" x2="90" y2="40" stroke="#e0e6f0" stroke-width="0.5"/>
+        <line x1="90" y1="290" x2="570" y2="290" stroke="#e0e6f0" stroke-width="0.5"/>
+        <line x1="230" y1="290" x2="230" y2="40" stroke="#e0e6f0" stroke-width="0.5" stroke-dasharray="4 3"/>
+        <line x1="370" y1="290" x2="370" y2="40" stroke="#e0e6f0" stroke-width="0.5" stroke-dasharray="4 3"/>
+        <line x1="90" y1="195" x2="570" y2="195" stroke="#e0e6f0" stroke-width="0.5" stroke-dasharray="4 3"/>
+        <line x1="90" y1="130" x2="570" y2="130" stroke="#e0e6f0" stroke-width="0.5" stroke-dasharray="4 3"/>
+
+        <!-- Axes -->
+        <line x1="90" y1="290" x2="570" y2="290" stroke="#1a1a2e" stroke-width="1.5" marker-end="url(#ah-axis)"/>
+        <line x1="90" y1="290" x2="90" y2="40" stroke="#1a1a2e" stroke-width="1.5" marker-end="url(#ah-axis)"/>
+        <text x="578" y="294" font-family="'EB Garamond', serif" font-size="16" font-style="italic" fill="#1a1a2e">x</text>
+        <text x="82" y="34" font-family="'EB Garamond', serif" font-size="16" font-style="italic" fill="#1a1a2e">y</text>
+
+        <!-- Axis labels -->
+        <text x="230" y="304" font-size="10" fill="#8a9ab8" text-anchor="middle" font-family="'DM Mono',monospace">180 000</text>
+        <text x="370" y="304" font-size="10" fill="#8a9ab8" text-anchor="middle" font-family="'DM Mono',monospace">216 000</text>
+        <text x="75" y="199" font-size="10" fill="#8a9ab8" text-anchor="end" font-family="'DM Mono',monospace">80 000</text>
+        <text x="75" y="134" font-size="10" fill="#8a9ab8" text-anchor="end" font-family="'DM Mono',monospace">128 000</text>
+
+        <!-- Tick marks -->
+        <line x1="230" y1="285" x2="230" y2="295" stroke="#8a9ab8" stroke-width="1"/>
+        <line x1="370" y1="285" x2="370" y2="295" stroke="#8a9ab8" stroke-width="1"/>
+        <line x1="85" y1="195" x2="95" y2="195" stroke="#8a9ab8" stroke-width="1"/>
+        <line x1="85" y1="131" x2="95" y2="131" stroke="#8a9ab8" stroke-width="1"/>
+
+        <!-- Trajectory line -->
+        <line x1="90" y1="362" x2="540" y2="95" stroke="#c0cce0" stroke-width="1" stroke-dasharray="6 4"/>
+
+        <!-- Earth -->
+        <circle cx="90" cy="290" r="14" fill="#1d5fa6" opacity="0.9"/>
+        <circle cx="90" cy="290" r="10" fill="#2e7dd4" opacity="0.7"/>
+        <circle cx="90" cy="290" r="5" fill="#5ba3e8" opacity="0.8"/>
+        <text x="90" y="312" font-size="11" fill="#4a5568" text-anchor="middle" font-family="'DM Sans',sans-serif">Tierra (O)</text>
+
+        <!-- Moon -->
+        <circle cx="520" cy="82" r="16" fill="none" stroke="#c0cce0" stroke-width="1.5" stroke-dasharray="4 3"/>
+        <circle cx="520" cy="82" r="11" fill="#d8dde8" opacity="0.7"/>
+        <circle cx="520" cy="82" r="6" fill="#bfc6d4" opacity="0.6"/>
+        <text x="542" y="86" font-size="11" fill="#8a9ab8" font-family="'DM Sans',sans-serif">Luna</text>
+        <text x="542" y="98" font-size="9" fill="#aab0c0" font-family="'DM Mono',monospace">384 400 km</text>
+
+        <!-- r1 vector -->
+        <line x1="90" y1="290" x2="224" y2="189" stroke="#1d5fa6" stroke-width="2" marker-end="url(#ah)" stroke-linecap="round"/>
+        <circle cx="230" cy="195" r="4" fill="#1d5fa6"/>
+
+        <!-- r2 vector -->
+        <line x1="90" y1="290" x2="363" y2="125" stroke="#C03A24" stroke-width="2" marker-end="url(#ah)" stroke-linecap="round"/>
+        <circle cx="370" cy="131" r="4" fill="#C03A24"/>
+
+        <!-- Δr vector -->
+        <line x1="230" y1="195" x2="364" y2="131" stroke="#E8A422" stroke-width="2.5" stroke-dasharray="7 3" marker-end="url(#ah-disp)" stroke-linecap="round"/>
+
+        <!-- Component projections for r1 -->
+        <line x1="230" y1="195" x2="230" y2="290" stroke="#1d5fa6" stroke-width="0.7" stroke-dasharray="3 3" opacity="0.5"/>
+        <line x1="90" y1="195" x2="230" y2="195" stroke="#1d5fa6" stroke-width="0.7" stroke-dasharray="3 3" opacity="0.5"/>
+
+        <!-- Component projections for r2 -->
+        <line x1="370" y1="131" x2="370" y2="290" stroke="#C03A24" stroke-width="0.7" stroke-dasharray="3 3" opacity="0.5"/>
+        <line x1="90" y1="131" x2="370" y2="131" stroke="#C03A24" stroke-width="0.7" stroke-dasharray="3 3" opacity="0.5"/>
+
+        <!-- Labels -->
+        <text x="140" y="228" font-family="'EB Garamond',serif" font-size="16" font-style="italic" fill="#1d5fa6" font-weight="600">r̄₁</text>
+        <text x="212" y="185" font-size="10" fill="#4a7ab8" font-family="'DM Mono',monospace">(t₁ = 0 h)</text>
+
+        <text x="205" y="180" font-family="'EB Garamond',serif" font-size="16" font-style="italic" fill="#C03A24" font-weight="600">r̄₂</text>
+        <text x="340" y="118" font-size="10" fill="#a04030" font-family="'DM Mono',monospace">(t₂ = 2 h)</text>
+
+        <text x="285" y="148" font-family="'EB Garamond',serif" font-size="16" font-style="italic" fill="#c07800" font-weight="600">Δr̄</text>
+
+        <!-- Legend -->
+        <rect x="434" y="220" width="150" height="86" rx="4" fill="white" stroke="#d0d8e8" stroke-width="0.5"/>
+        <text x="442" y="236" font-size="10" fill="#6a7a98" font-family="'DM Sans',sans-serif" font-weight="600">LEYENDA</text>
+        <line x1="442" y1="253" x2="462" y2="253" stroke="#1d5fa6" stroke-width="2" marker-end="url(#ah)"/>
+        <text x="468" y="257" font-size="11" fill="#1d5fa6" font-family="'DM Sans',sans-serif">Vector r̄₁</text>
+        <line x1="442" y1="272" x2="462" y2="272" stroke="#C03A24" stroke-width="2" marker-end="url(#ah)"/>
+        <text x="468" y="276" font-size="11" fill="#C03A24" font-family="'DM Sans',sans-serif">Vector r̄₂</text>
+        <line x1="442" y1="291" x2="462" y2="291" stroke="#E8A422" stroke-width="2.5" stroke-dasharray="5 2" marker-end="url(#ah-disp)"/>
+        <text x="468" y="295" font-size="11" fill="#c07800" font-family="'DM Sans',sans-serif">Δr̄</text>
+
+        <text x="94" y="307" font-size="10" fill="#1a1a2e" font-family="'DM Mono',monospace">O</text>
+      </svg>
+      <p class="diagram-caption">
+        Fig. 1 — Sistema de referencia con origen en el centro de la Tierra. Vectores y distancias sin escala.<br>
+        Las proyecciones punteadas muestran las componentes cartesianas de cada vector de posición.
+      </p>
+    </div>
+
+    <!-- PREGUNTAS -->
+    <div id="cuestiones" class="section-label">Cuestiones planteadas</div>
+
+    <div class="pregunta">
+      <div class="pregunta-letter">a</div>
+      <div class="pregunta-body">
+        <p>Escribe el <strong>vector de posición</strong> r̄(t) de la cápsula Orion en notación vectorial, utilizando los vectores unitarios <em>î</em> y <em>ĵ</em>.</p>
+      </div>
+    </div>
+
+    <div class="pregunta">
+      <div class="pregunta-letter">b</div>
+      <div class="pregunta-body">
+        <p>Determina los <strong>vectores de posición r̄₁</strong> (en t₁ = 0 h) y <strong>r̄₂</strong> (en t₂ = 2 h). Calcula el módulo de cada uno de ellos.</p>
+      </div>
+    </div>
+
+    <div class="pregunta">
+      <div class="pregunta-letter">c</div>
+      <div class="pregunta-body">
+        <p>Calcula el <strong>vector desplazamiento Δr̄</strong> que experimenta Orion entre t₁ y t₂. ¿Coincide con la trayectoria recorrida? Razona tu respuesta.</p>
+      </div>
+    </div>
+
+    <div class="pregunta">
+      <div class="pregunta-letter">d</div>
+      <div class="pregunta-body">
+        <p>Elimina el parámetro <em>t</em> de las ecuaciones paramétricas para obtener la <strong>ecuación de la trayectoria</strong> y(x). ¿Qué tipo de trayectoria describe la cápsula en esta fase? ¿Qué tipo de movimiento se produce?</p>
+      </div>
+    </div>
+
+    <div class="pregunta">
+      <div class="pregunta-letter">e</div>
+      <div class="pregunta-body">
+        <p>Calcula el <strong>vector velocidad instantánea</strong> v̄(t) derivando r̄(t) respecto del tiempo. Determina su módulo y expresa el resultado en km/h y en m/s. ¿Es constante la velocidad?</p>
+        <p class="sub">Recuerda: v̄ = dr̄/dt = (dx/dt)·î + (dy/dt)·ĵ</p>
+      </div>
+    </div>
+
+    <div class="pregunta">
+      <div class="pregunta-letter" style="background: #8a7700; color: white;">f</div>
+      <div class="pregunta-body">
+        <p><strong>Distancia al centro de la Tierra</strong> <span class="tag-ext">Ampliación</span></p>
+        <p>¿A qué distancia del centro de la Tierra se encontraba Orion en t₁ = 0 h y en t₂ = 2 h? Compara estos valores con la distancia media Tierra–Luna (384 400 km) y comenta el resultado.</p>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- SOLUCIONES -->
+    <button class="sol-toggle" id="btn-sol" onclick="toggleSol()" aria-expanded="false" aria-controls="soluciones">
+      <span class="arrow">▶</span> Mostrar guía de solución
+    </button>
+
+    <div id="soluciones" role="region" aria-live="polite">
+
+      <div class="solucion">
+        <div class="solucion-header">
+          <div class="solucion-letter">a</div>
+          <span class="solucion-title">Vector de posición r̄(t)</span>
+        </div>
+        <div class="solucion-body">
+          Combinando las dos ecuaciones paramétricas en notación vectorial:
+          <code class="math resultado">r̄(t) = (180 000 + 18 000·t) î + (80 000 + 24 000·t) ĵ  (km, t en horas)</code>
+        </div>
+      </div>
+
+      <div class="solucion">
+        <div class="solucion-header">
+          <div class="solucion-letter">b</div>
+          <span class="solucion-title">Vectores de posición r̄₁ y r̄₂</span>
+        </div>
+        <div class="solucion-body">
+          <code class="math">r̄₁ = r̄(0) = 180 000 î + 80 000 ĵ  km</code>
+          <code class="math">|r̄₁| = √(180 000² + 80 000²) = √(3,24×10¹⁰ + 6,4×10⁹) = √(3,88×10¹⁰)</code>
+          <code class="resultado">|r̄₁| ≈ 197 000 km  ≈ 197 Mm  (altitud ≈ 190 600 km)</code>
+          <code class="math">r̄₂ = r̄(2) = (180 000 + 36 000) î + (80 000 + 48 000) ĵ</code>
+          <code class="math">r̄₂ = 216 000 î + 128 000 ĵ  km</code>
+          <code class="math">|r̄₂| = √(216 000² + 128 000²) = √(4,67×10¹⁰ + 1,64×10¹⁰) = √(6,30×10¹⁰)</code>
+          <code class="resultado">|r̄₂| ≈ 251 000 km  ≈ 251 Mm  (altitud ≈ 244 600 km)</code>
+        </div>
+      </div>
+
+      <div class="solucion">
+        <div class="solucion-header">
+          <div class="solucion-letter">c</div>
+          <span class="solucion-title">Vector desplazamiento Δr̄</span>
+        </div>
+        <div class="solucion-body">
+          <code class="math">Δr̄ = r̄₂ − r̄₁ = (216 000 − 180 000) î + (128 000 − 80 000) ĵ</code>
+          <code class="resultado">Δr̄ = 36 000 î + 48 000 ĵ  km</code>
+          <code class="math">|Δr̄| = √(36 000² + 48 000²) = √(1,296×10⁹ + 2,304×10⁹) = √(3,6×10⁹)</code>
+          <code class="resultado">|Δr̄| = 60 000 km  (terna pitagórica 3-4-5 ✓)</code>
+          <span class="nota"><strong>✓ El vector desplazamiento</strong> va del punto inicial al final, independientemente de la trayectoria. Aquí la trayectoria es rectilínea, por lo que el desplazamiento tiene la misma dirección y su módulo coincide con la distancia recorrida.</span>
+        </div>
+      </div>
+
+      <div class="solucion">
+        <div class="solucion-header">
+          <div class="solucion-letter">d</div>
+          <span class="solucion-title">Ecuación de la trayectoria</span>
+        </div>
+        <div class="solucion-body">
+          Se despeja <em>t</em> de x(t) y se sustituye en y(t):
+          <code class="math">t = (x − 180 000) / 18 000</code>
+          <code class="math">y = 80 000 + 24 000 · [(x − 180 000) / 18 000]</code>
+          <code class="math">y = 80 000 + (4/3)·(x − 180 000)</code>
+          <code class="resultado">y = (4/3)·x − 160 000  →  línea recta (pendiente m = 4/3)</code>
+          <span class="nota"><strong>🎯 Tipo de movimiento:</strong> Trayectoria rectilínea + velocidad constante = <strong>Movimiento Rectilíneo Uniforme (MRU)</strong>. Esta es una aproximación válida para una ventana corta alejada de maniobras.</span>
+        </div>
+      </div>
+
+      <div class="solucion">
+        <div class="solucion-header">
+          <div class="solucion-letter">e</div>
+          <span class="solucion-title">Vector velocidad instantánea</span>
+        </div>
+        <div class="solucion-body">
+          Derivando componente a componente:
+          <code class="math">v̄(t) = dr̄/dt = (dx/dt)·î + (dy/dt)·ĵ = 18 000 î + 24 000 ĵ  km/h</code>
+          <code class="math">|v̄| = √(18 000² + 24 000²) = √(3,24×10⁸ + 5,76×10⁸) = √(9,00×10⁸)</code>
+          <code class="resultado">|v̄| = 30 000 km/h = 8 333 m/s ≈ 8,3 km/s  (terna 3-4-5 ✓)</code>
+          <span class="nota"><strong>✓ Velocidad constante</strong> (no depende de t) → Confirma MRU. El valor 8,3 km/s es coherente con los ~10,2 km/s registrados tras TLI: Orion pierde energía al alejarse del campo gravitacional terrestre.</span>
+        </div>
+      </div>
+
+      <div class="solucion">
+        <div class="solucion-header">
+          <div class="solucion-letter" style="background: #8a7700; color: white;">f</div>
+          <span class="solucion-title">Distancias al centro de la Tierra (Ampliación)</span>
+        </div>
+        <div class="solucion-body">
+          Las distancias son directamente los módulos calculados en el apartado b:
+          <code class="resultado">|r̄₁| ≈ 197 000 km  ·  |r̄₂| ≈ 251 000 km</code>
+          <span class="nota"><strong>📊 Análisis:</strong> Ambos valores son <strong>mucho menores</strong> que los 384 400 km de Tierra–Luna. Esto confirma que esta fase corresponde al primer tramo del crucero translunar, donde Orion aún está mucho más cerca de la Tierra que de la Luna. La cápsula se aleja a ~30 000 km/h.</span>
+        </div>
+      </div>
+
+    </div><!-- /#soluciones -->
+
+  </div><!-- /.content -->
+
+  <div class="footer">
+    📚 Datos de trayectoria basados en <strong>NASA Artemis I Mission Operations Report</strong> (noviembre 2022)<br>
+    Las ecuaciones de posición están simplificadas con fines pedagógicos; el movimiento real es ligeramente curvilíneo.<br>
+    <strong>Autor:</strong> Antonio López · <strong>Nivel:</strong> 1º Bachillerato LOMLOE · <strong>Año:</strong> 2025
+  </div>
+
+</div><!-- /.page -->
+
+<script>
+  function toggleSol() {
+    const sol = document.getElementById('soluciones');
+    const btn = document.getElementById('btn-sol');
+    const open = sol.classList.toggle('visible');
+    btn.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', open);
+    btn.querySelector('.arrow').textContent = open ? '▼' : '▶';
+    const span = btn.querySelector('span:last-child') || document.createElement('span');
+    if (!btn.querySelector('span:last-child')) btn.appendChild(span);
+    span.textContent = ' ' + (open ? 'Ocultar guía de solución' : 'Mostrar guía de solución');
+  }
+
+  function copiarEcuaciones() {
+    const texto = `x(t) = 180 000 + 18 000·t  (km)
+y(t) =  80 000 + 24 000·t  (km)`;
+    
+    navigator.clipboard.writeText(texto).then(() => {
+      const btn = event.target;
+      const original = btn.textContent;
+      btn.textContent = '✓ Copiado';
+      setTimeout(() => { btn.textContent = original; }, 2000);
+    }).catch(err => {
+      console.error('Error al copiar:', err);
+      alert('No se pudo copiar al portapapeles');
+    });
+  }
+
+  // Smooth scroll for TOC links
+  document.querySelectorAll('.toc a').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const id = link.getAttribute('href').substring(1);
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
